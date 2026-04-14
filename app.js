@@ -130,7 +130,7 @@
     var canvas = document.getElementById('particles-canvas');
     var ctx = canvas.getContext('2d');
     var particles = [];
-    var particleCount = 100;
+    var particleCount = 75;
     var connectionDistance = 150;
 
     // Set canvas size
@@ -145,16 +145,16 @@
     function Particle(x, y) {
       this.x = x;
       this.y = y;
-      this.vx = (Math.random() - 0.5) * 0.025;
-      this.vy = (Math.random() - 0.5) * 0.1;
-      this.size = Math.random() * 1.5 + 0.5;
-      this.color = Math.random() > 0.5 ? 'rgba(124, 58, 237, 0.5)' : 'rgba(6, 182, 212, 0.5)';
+      this.vx = (Math.random() - 0.5) * 0.01;
+      this.vy = (Math.random() - 0.5) * 0.05;
+      this.size = Math.random() * 1.2 + 0.4;
+      this.color = Math.random() > 0.5 ? 'rgba(124, 58, 237, 0.35)' : 'rgba(6, 182, 212, 0.35)';
     }
 
     Particle.prototype.update = function() {
       this.x += this.vx;
       this.y += this.vy;
-      this.vy += 0.0025; // gravity
+      this.vy += 0.0015; // gravity
 
       // Bounce/wrap around
       if (this.y > canvas.height) {
@@ -191,9 +191,9 @@
           var distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < connectionDistance) {
-            var opacity = (1 - distance / connectionDistance) * 0.3;
+            var opacity = (1 - distance / connectionDistance) * 0.18;
             ctx.strokeStyle = 'rgba(124, 58, 237, ' + opacity + ')';
-            ctx.lineWidth = 0.5;
+            ctx.lineWidth = 0.4;
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
@@ -204,8 +204,8 @@
     }
 
     function applyRepulsion() {
-      var repelDistance = 60;
-      var repelStrength = 0.03;
+      var repelDistance = 50;
+      var repelStrength = 0.015;
 
       for (var i = 0; i < particles.length; i++) {
         for (var j = i + 1; j < particles.length; j++) {
