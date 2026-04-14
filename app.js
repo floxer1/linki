@@ -124,4 +124,132 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeModal();
   });
+
+  // ---------- Particles Network Animation ----------
+  function initParticleNetwork() {
+    var canvas = document.getElementById('particles-canvas');
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var particleCount = 100;
+    var connectionDistance = 150;
+
+    // Set canvas size
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Particle object
+    function Particle(x, y) {
+      this.x = x;
+      this.y = y;
+      this.vx = (Math.random() - 0.5) * 0.025;
+      this.vy = (Math.random() - 0.5) * 0.1;
+      this.size = Math.random() * 1.5 + 0.5;
+      this.color = Math.random() > 0.5 ? 'rgba(124, 58, 237, 0.5)' : 'rgba(6, 182, 212, 0.5)';
+    }
+
+    Particle.prototype.update = function() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.vy += 0.0025; // gravity
+
+      // Bounce/wrap around
+      if (this.y > canvas.height) {
+        this.y = -10;
+        this.x = Math.random() * canvas.width;
+      }
+      if (this.x < 0) this.x = canvas.width;
+      if (this.x > canvas.width) this.x = 0;
+    };
+
+    Particle.prototype.draw = function() {
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    };
+
+    // Create particles
+    for (var i = 0; i < particleCount; i++) {
+      particles.push(new Particle(
+        Math.random() * canvas.width,
+        Math.random() * canvas.height
+      ));
+    }
+
+    // Draw connections
+    function drawConnections() {
+      for (var i = 0; i < particles.length; i++) {
+        for (var j = i + 1; j < particles.length; j++) {
+          var p1 = particles[i];
+          var p2 = particles[j];
+          var dx = p1.x - p2.x;
+          var dy = p1.y - p2.y;
+          var distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < connectionDistance) {
+            var opacity = (1 - distance / connectionDistance) * 0.3;
+            ctx.strokeStyle = 'rgba(124, 58, 237, ' + opacity + ')';
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function applyRepulsion() {
+      var repelDistance = 60;
+      var repelStrength = 0.03;
+
+      for (var i = 0; i < particles.length; i++) {
+        for (var j = i + 1; j < particles.length; j++) {
+          var p1 = particles[i];
+          var p2 = particles[j];
+          var dx = p1.x - p2.x;
+          var dy = p1.y - p2.y;
+          var distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance > 0 && distance < repelDistance) {
+            var force = (repelDistance - distance) / repelDistance * repelStrength;
+            var nx = dx / distance;
+            var ny = dy / distance;
+            p1.vx += nx * force;
+            p1.vy += ny * force;
+            p2.vx -= nx * force;
+            p2.vy -= ny * force;
+          }
+        }
+      }
+    }
+
+    // Animation loop
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Apply repulsion before updating particles
+      applyRepulsion();
+
+      // Update and draw particles
+      for (var i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+
+      // Draw connections
+      drawConnections();
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  }
+
+  // Initialize particle network on load
+  initParticleNetwork();
 })();
