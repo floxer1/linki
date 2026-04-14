@@ -130,7 +130,7 @@
     var canvas = document.getElementById('particles-canvas');
     var ctx = canvas.getContext('2d');
     var particles = [];
-    var particleCount = 75;
+    var particleCount = 55;
     var connectionDistance = 150;
 
     // Set canvas size
@@ -145,16 +145,18 @@
     function Particle(x, y) {
       this.x = x;
       this.y = y;
-      this.vx = (Math.random() - 0.5) * 0.01;
-      this.vy = (Math.random() - 0.5) * 0.05;
-      this.size = Math.random() * 1.2 + 0.4;
-      this.color = Math.random() > 0.5 ? 'rgba(124, 58, 237, 0.35)' : 'rgba(6, 182, 212, 0.35)';
+      this.vx = (Math.random() - 0.5) * 0.005;
+      this.vy = (Math.random() - 0.5) * 0.02;
+      this.size = Math.random() * 1 + 0.35;
+      this.color = Math.random() > 0.5 ? 'rgba(124, 58, 237, 0.28)' : 'rgba(6, 182, 212, 0.28)';
     }
 
     Particle.prototype.update = function() {
       this.x += this.vx;
       this.y += this.vy;
-      this.vy += 0.0015; // gravity
+      this.vy += 0.0008; // gravity
+      this.vx *= 0.995;
+      this.vy *= 0.995;
 
       // Bounce/wrap around
       if (this.y > canvas.height) {
@@ -205,7 +207,7 @@
 
     function applyRepulsion() {
       var repelDistance = 50;
-      var repelStrength = 0.015;
+      var repelStrength = 0.008;
 
       for (var i = 0; i < particles.length; i++) {
         for (var j = i + 1; j < particles.length; j++) {
