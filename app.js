@@ -147,7 +147,7 @@
       this.y = y;
       this.vx = (Math.random() - 0.5) * 0.005;
       this.vy = (Math.random() - 0.5) * 0.02;
-      this.size = Math.random() * 1 + 0.35;
+      this.size = Math.random() * 2.5 + 0.8;
       this.color = Math.random() > 0.5 ? 'rgba(124, 58, 237, 0.28)' : 'rgba(6, 182, 212, 0.28)';
     }
 
