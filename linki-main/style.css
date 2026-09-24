@@ -304,6 +304,23 @@ body {
   100% { transform: translateX(330%)  skewX(-18deg); }   /* pause jusqu'à 10 s */
 }
 
+/* Secousse « cadeau surprise » : juste après le reflet, même cycle de 10 s.
+   Portée par le conteneur pour laisser au bouton son scale(.96) au tap. */
+.cta-shake {
+  transform-origin: 50% 100%;
+  animation: gift-shake 10s ease-in-out 1.6s infinite;
+  will-change: transform;
+}
+@keyframes gift-shake {
+  0%, 11%  { transform: rotate(0deg) scale(1); }
+  12.2%    { transform: rotate(-2.4deg) scale(1.02); }
+  13.6%    { transform: rotate(2.4deg)  scale(1.02); }
+  15%      { transform: rotate(-1.8deg) scale(1.015); }
+  16.4%    { transform: rotate(1.4deg)  scale(1.01); }
+  17.6%    { transform: rotate(-0.6deg) scale(1.005); }
+  18.6%, 100% { transform: rotate(0deg) scale(1); }
+}
+
 /* 2 · Champagne : le livre */
 .btn-secondary {
   background: var(--champagne);
@@ -363,6 +380,7 @@ body {
   .btn { transition: none; }
   .btn:active { transform: none; }
   .btn-primary::after { animation: none; display: none; }
+  .cta-shake { animation: none; }
   .tuto-arrow.bounce { animation: none; }
 }
 
