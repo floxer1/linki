@@ -247,6 +247,21 @@ body {
   text-wrap: balance;
 }
 
+/* Étiquette d'information (ex. « Gratuit ») */
+.btn-tag {
+  flex-shrink: 0;
+  align-self: center;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--champagne);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
 /* 1 · Or plein : l'action principale */
 .btn-primary {
   position: relative;
