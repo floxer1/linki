@@ -273,7 +273,7 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.38),
     0 14px 34px -14px rgba(217, 182, 100, 0.6);
 }
-/* Reflet qui balaie le bouton toutes les ~4 s : attire l'œil sans déplacer la cible */
+/* Reflet qui balaie le bouton toutes les 10 s : attire l'œil sans déplacer la cible */
 .btn-primary::after {
   content: '';
   position: absolute;
@@ -290,7 +290,7 @@ body {
     rgba(255, 255, 255, 0) 100%
   );
   transform: translateX(-160%) skewX(-18deg);
-  animation: sheen 4.2s linear 1.6s 3;
+  animation: sheen 10s linear 1.6s infinite;
   pointer-events: none;
   z-index: 1;
 }
@@ -300,8 +300,8 @@ body {
 }
 @keyframes sheen {
   0%   { transform: translateX(-160%) skewX(-18deg); }
-  26%  { transform: translateX(330%)  skewX(-18deg); }
-  100% { transform: translateX(330%)  skewX(-18deg); }
+  11%  { transform: translateX(330%)  skewX(-18deg); }   /* balayage ≈ 1,1 s */
+  100% { transform: translateX(330%)  skewX(-18deg); }   /* pause jusqu'à 10 s */
 }
 
 /* 2 · Champagne : le livre */
