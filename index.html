@@ -4,19 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0a0908">
-  <meta name="description" content="Mes Jobs en Ligne — des ressources, des opportunités et des outils pour construire ta prochaine source de revenus. Formation, ebook « Devenir une nouvelle personne en 30 jours » et chaîne Telegram.">
-  <title>Mes Jobs en Ligne</title>
+  <meta name="description" content="Mes Jobs en Ligne — immigrer au Canada légalement, gagner avec des entreprises étrangères. Clique et découvre.">
+  <title>Mes Jobs en Ligne — Immigrer au Canada légalement</title>
 
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-variable.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/playfair-italic-400.woff2" crossorigin>
-  <link rel="preload" as="image" href="assets/warren-buffett.jpg" fetchpriority="high">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ==========================================
-       MODAL "COPIER / OUVRIR" (navigateurs in-app : TikTok, Instagram...)
-       ========================================== -->
+  <!-- Modal TikTok / in-app -->
   <div class="modal-overlay" id="modal" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <button class="modal-close" id="modal-close" aria-label="Fermer">&times;</button>
@@ -64,37 +60,26 @@
     </div>
   </div>
 
-  <!-- ==========================================
-       PAGE — un seul écran, photo en fond
-       ========================================== -->
   <div class="page">
-    <img class="bg" src="assets/warren-buffett.jpg" alt="" aria-hidden="true" decoding="async" fetchpriority="high">
+    <!-- Fond photo : voyageur — aspiration, identification -->
+    <div class="bg" aria-hidden="true">
+      <img class="bg-photo" src="assets/traveler-bg.jpg" alt="" width="1080" height="1920" decoding="async" fetchpriority="high">
+    </div>
     <div class="shade" aria-hidden="true"></div>
 
     <header class="top">
+      <p class="kicker">Africains francophones · voies officielles</p>
       <h1 class="title">Mes Jobs<br>en Ligne</h1>
-      <p class="lead">Des ressources, des opportunités et des outils pour construire ta prochaine source de revenus.</p>
-
-      <figure class="quote">
-        <blockquote>
-          <p>«&#8239;Le meilleur investissement que tu peux faire, c’est l’investissement que tu fais pour toi-même.&#8239;»</p>
-        </blockquote>
-        <figcaption>— Warren Buffett</figcaption>
-      </figure>
+      <p class="lead">Arrête de deviner. Clique, découvre la bonne piste — Canada ou revenus internationaux.</p>
     </header>
 
     <main class="actions">
       <!--
-        ============================================
         MODIFIE TES LIENS ICI
-        data-url  = le vrai lien (doit commencer par https://)
-        data-name = le nom affiché dans le modal
-        (le logo du bouton est repris automatiquement dans le modal)
-        Tant qu'un lien contient "REMPLACER_", le bouton reste inactif.
-        ============================================
+        data-url  = le vrai lien (https://)
+        data-name = nom dans le modal
       -->
 
-      <!-- Pictogramme Chariow (défini une fois, réutilisé deux fois) -->
       <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
         <symbol id="ico-chariow" viewBox="0 42 331 332">
           <path d="M331.11 146.09c0 91.44-74.12 165.56-165.56 165.56S0 237.53 0 146.09h41.22c0 68.67 55.66 124.34 124.33 124.34s124.34-55.67 124.34-124.34z"/>
@@ -108,26 +93,25 @@
         </symbol>
       </svg>
 
-      <!-- 1 · CHARIOW (action principale) — le conteneur porte la secousse « cadeau » -->
+      <!-- 01 · CANADA — CTA principal (offre payante à fort désir) -->
       <div class="cta-shake">
         <a href="#" class="btn btn-primary link-card"
-           data-url="https://novasdigital.site/travailler-entreprises-etrangeres?utm_source=linkbio&utm_medium=social&utm_content=formation"
-           data-name="La formation">
+           data-url="https://novasdigital.site/immigrer-au-canada?utm_source=linkbio&utm_medium=social&utm_content=canada"
+           data-name="Le guide Canada">
           <svg class="btn-ico" aria-hidden="true" focusable="false"><use href="#ico-chariow"/></svg>
-          <span class="btn-label">Travailler avec des entreprises étrangères depuis l’Afrique</span>
+          <span class="btn-label">Immigrer au Canada légalement</span>
         </a>
       </div>
 
-      <!-- 2 · CHARIOW · EBOOK -->
+      <!-- 02 · JOBS INTERNATIONAUX — 2ᵉ offre payante -->
       <a href="#" class="btn btn-secondary link-card"
-         data-url="https://novasdigital.site/30-jours-devenir-meilleur?utm_source=linkbio&utm_medium=social&utm_content=ebook"
-         data-name="L’ebook gratuit">
+         data-url="https://novasdigital.site/travailler-entreprises-etrangeres?utm_source=linkbio&utm_medium=social&utm_content=jobs"
+         data-name="Le guide revenus">
         <svg class="btn-ico" aria-hidden="true" focusable="false"><use href="#ico-chariow"/></svg>
-        <span class="btn-label">Devenir une nouvelle personne en 30&nbsp;jours</span>
-        <span class="btn-tag">Gratuit</span>
+        <span class="btn-label">Gagner avec des entreprises étrangères</span>
       </a>
 
-      <!-- 3 · TELEGRAM (communauté) -->
+      <!-- 03 · TELEGRAM — communauté (pas de gratuit concurrent) -->
       <a href="#" class="btn btn-tertiary link-card"
          data-url="https://t.me/+V1sK05H9JjZkZjc0"
          data-name="La chaîne Telegram">

@@ -17,14 +17,6 @@
   font-display: swap;
   src: url('assets/fonts/inter-variable.woff2') format('woff2');
 }
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url('assets/fonts/playfair-italic-400.woff2') format('woff2');
-}
-
 :root {
   --bg: #0a0908;
   --text: #f4efe6;
@@ -36,13 +28,13 @@
   --gold-light: #f3dc98;
   --gold-deep: #b8923f;
   --champagne: #efe4cf;
+  --green-deep: #0f241c;
 
   --line: rgba(244, 239, 230, 0.10);
 
   --radius-btn: 16px;
 
   --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
 
   /* Courbe forte pour les interactions (ease-out) */
   --ease-out: cubic-bezier(0.2, 0, 0, 1);
@@ -78,44 +70,44 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 28px;
+  gap: 20px;
   padding:
-    max(28px, env(safe-area-inset-top))
+    max(22px, env(safe-area-inset-top))
     20px
-    max(18px, env(safe-area-inset-bottom));
+    max(14px, env(safe-area-inset-bottom));
   background: var(--bg);
   isolation: isolate;
 }
 
-/* Photo en fond, pleine hauteur */
+/* Fond photo plein écran — le visage reste lisible en haut, les CTA en bas */
 .bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  background: #0a0908;
+}
+.bg-photo {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* visage légèrement à droite du centre, dans le tiers haut/médian */
-  object-position: 18% 28%;
-  filter: saturate(0.82) contrast(1.04);
-  z-index: -2;
-  pointer-events: none;
-  user-select: none;
+  object-position: center 22%;
 }
 
-/* Voile : dense en haut (titre) et en bas (boutons), ouvert au milieu (visage) */
 .shade {
   position: absolute;
   inset: 0;
   z-index: -1;
   background: linear-gradient(
     to bottom,
-    rgba(10, 9, 8, 0.90) 0%,
-    rgba(10, 9, 8, 0.72) 22%,
-    rgba(10, 9, 8, 0.30) 42%,
-    rgba(10, 9, 8, 0.22) 52%,
-    rgba(10, 9, 8, 0.66) 66%,
-    rgba(10, 9, 8, 0.94) 80%,
-    var(--bg) 100%
+    rgba(10, 9, 8, 0.28) 0%,
+    rgba(10, 9, 8, 0.18) 28%,
+    rgba(10, 9, 8, 0.55) 55%,
+    rgba(10, 9, 8, 0.88) 78%,
+    #0a0908 100%
   );
   pointer-events: none;
 }
@@ -124,9 +116,8 @@ body {
 @media (max-width: 380px), (max-height: 640px) {
   .page { gap: 18px; padding-top: max(20px, env(safe-area-inset-top)); }
   .title { font-size: clamp(38px, 11vw, 46px); }
+  .kicker { margin-bottom: 8px; }
   .lead { margin-top: 10px; font-size: 14px; }
-  .quote { margin-top: 14px; }
-  .quote blockquote p { font-size: 14.5px; }
   .actions { gap: 8px; }
   .btn { min-height: 52px; padding: 12px 16px; font-size: 15px; }
 }
@@ -151,50 +142,40 @@ body {
 }
 
 /* ==========================================
-   HAUT : TITRE · PROMESSE · CITATION
+   HAUT : IDENTITÉ · PROMESSE
    ========================================== */
 .top {
   position: relative;
 }
 
+.kicker {
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
+}
+
 .title {
-  font-size: clamp(42px, 12vw, 58px);
+  font-size: clamp(38px, 10.5vw, 52px);
   line-height: 0.96;
   font-weight: 800;
   letter-spacing: -0.035em;
   text-transform: uppercase;
   color: var(--text);
   text-wrap: balance;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
 }
 
 .lead {
-  margin-top: 14px;
-  max-width: 32ch;
-  font-size: 15px;
-  line-height: 1.5;
+  margin-top: 12px;
+  max-width: 34ch;
+  font-size: 14px;
+  line-height: 1.45;
   color: var(--text-soft);
   text-wrap: pretty;
-}
-
-.quote {
-  margin-top: 20px;
-  max-width: 34ch;
-}
-.quote blockquote p {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 15.5px;
-  line-height: 1.42;
-  color: var(--text);
-  text-wrap: pretty;
-}
-.quote figcaption {
-  margin-top: 8px;
-  font-size: 12px;
-  line-height: 1.3;
-  font-weight: 600;
-  color: var(--gold);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
 }
 
 /* ==========================================
@@ -204,17 +185,17 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .btn {
   display: flex;
   align-items: center;
   gap: 14px;
-  min-height: 58px;
-  padding: 14px 18px;
+  min-height: 56px;
+  padding: 13px 16px;
   border-radius: var(--radius-btn);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.005em;
@@ -244,29 +225,18 @@ body {
 }
 .btn-label {
   flex: 1;
+  min-width: 0;
   text-wrap: balance;
 }
 
-/* Étiquette d'information (ex. « Gratuit ») */
-.btn-tag {
-  flex-shrink: 0;
-  align-self: center;
-  padding: 5px 9px;
-  border-radius: 999px;
-  background: var(--ink);
-  color: var(--champagne);
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-}
-
-/* 1 · Or plein : l'action principale */
+/* 1 · Or plein : l'action principale (plus grande = plus de clics) */
 .btn-primary {
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  min-height: 60px;
+  padding: 14px 16px;
+  font-size: 15px;
   background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 52%, var(--gold-deep) 100%);
   color: var(--ink);
   box-shadow:
@@ -308,9 +278,13 @@ body {
    secousse sur deux suit le reflet). Portée par le conteneur pour laisser au
    bouton son scale(.96) au tap. */
 .cta-shake {
+  width: 100%;
   transform-origin: 50% 100%;
   animation: gift-shake 5s ease-in-out 1.6s infinite;
   will-change: transform;
+}
+.cta-shake .btn {
+  width: 100%;
 }
 @keyframes gift-shake {
   0%, 22%  { transform: rotate(0deg) scale(1); }        /* 1,1 s de repos = durée du reflet */
@@ -322,18 +296,20 @@ body {
   37.2%, 100% { transform: rotate(0deg) scale(1); }
 }
 
-/* 2 · Champagne : le livre */
+/* 2 · Champagne : 2ᵉ offre (plus discrète que le Canada) */
 .btn-secondary {
+  min-height: 54px;
   background: var(--champagne);
   color: var(--ink);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
-/* 3 · Contour : la communauté */
+/* 3 · Contour : communauté (jamais « gratuit » — pas de cannibalisation) */
 .btn-tertiary {
-  background: rgba(10, 9, 8, 0.42);
-  border: 1px solid rgba(217, 182, 100, 0.48);
-  color: var(--text);
+  min-height: 52px;
+  background: rgba(10, 9, 8, 0.55);
+  border: 1px solid rgba(217, 182, 100, 0.38);
+  color: var(--text-soft);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -356,24 +332,25 @@ body {
    UNE SEULE SÉQUENCE D'ENTRÉE
    ========================================== */
 .top,
-.actions .btn,
+.actions .cta-shake .btn,
+.actions > .btn,
 .actions .footer {
   opacity: 0;
   transform: translateY(8px);
   animation: enter 520ms var(--ease-out) forwards;
 }
-.top                   { animation-delay: 40ms; }
-.actions .btn:nth-child(1) { animation-delay: 160ms; }
-.actions .btn:nth-child(2) { animation-delay: 220ms; }
-.actions .btn:nth-child(3) { animation-delay: 280ms; }
-.actions .footer       { animation-delay: 340ms; }
+.top                           { animation-delay: 40ms; }
+.actions .cta-shake .btn       { animation-delay: 160ms; }
+.actions > .btn:nth-of-type(1) { animation-delay: 220ms; }
+.actions > .btn:nth-of-type(2) { animation-delay: 280ms; }
+.actions .footer               { animation-delay: 340ms; }
 
 @keyframes enter {
   to { opacity: 1; transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .top, .actions .btn, .actions .footer {
+  .top, .actions .cta-shake .btn, .actions > .btn, .actions .footer {
     transform: none;
     animation: fade 200ms ease forwards;
   }
